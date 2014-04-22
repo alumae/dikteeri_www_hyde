@@ -1,2 +1,12 @@
 extends: site.yaml
 mode: production
+media_url: /dikteeri/media
+
+publisher:
+        ssh:
+            type: hyde.ext.publishers.ssh.SSH
+            username: webspeech
+            server: fourier
+            target: /var/www/dikteeri
+            command: rsync
+            opts: -r -e ssh

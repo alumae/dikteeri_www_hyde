@@ -3,6 +3,7 @@
 {% extends "topbar.j2" %}
 
 {% block container %}
+{{ super() }} {# Use this to include the rest of the body block as it was originally defined #}
 
       {% filter markdown -%}
       {% block main %}{% endblock %}

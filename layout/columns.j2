@@ -1,0 +1,14 @@
+{# Columns template #}
+
+{% extends "topbar.j2" %}
+
+{% block container %}
+
+      {% filter markdown -%}
+      {% block main %}{% endblock %}
+      {%- endfilter %}
+
+{% endblock container %}
+
+
+

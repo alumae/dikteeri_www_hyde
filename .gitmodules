@@ -1,6 +1,6 @@
 [submodule "bootstrap"]
 	path = bootstrap
 	url = git://github.com/twitter/bootstrap.git
-[submodule "content/media/js/libs/dikteeri.js"]
-	path = content/media/js/libs/dikteeri.js
+[submodule "content/media/js/libs/dictate.js"]
+	path = content/media/js/libs/dictate.js
 	url = https://github.com/alumae/dictate.js.git

@@ -1,5 +1,6 @@
 extends: site.yaml
 mode: production
+base_url: /dikteeri
 media_url: /dikteeri/media
 
 publisher:

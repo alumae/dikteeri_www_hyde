@@ -90,7 +90,12 @@ function getAverage(array) {
 
 function rafCallback(time) {
 
-  window.webkitRequestAnimationFrame(rafCallback, this);
+  var requestAnimationFrame = window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame;
+  requestAnimationFrame(rafCallback, this);
   if (isConnected) {
     var freqByteData = new Uint8Array(userSpeechAnalyser.frequencyBinCount);
     userSpeechAnalyser.getByteFrequencyData(freqByteData); 
@@ -101,81 +106,88 @@ function rafCallback(time) {
   }
 }
 
-  
-  
+var dictate = null;
 
-var dictate = new Dictate({
-		server : "ws://bark.phon.ioc.ee:82/dev/duplex-speech-api/ws/speech",
-		serverStatus : "ws://bark.phon.ioc.ee:82/dev/duplex-speech-api/ws/status",
-		//server : "ws://bayes:8888/client/ws/speech",
-		//serverStatus : "ws://bayes:8888/client/ws/status",
-    
-		recorderWorkerPath : "{{ media_url('js/libs/dictate.js/lib/recorderWorker.js') }}",
-		onReadyForSpeech : function() {
-			isConnected = true;
-			__message("READY FOR SPEECH");
-      $("#recbutton").addClass("playing");
-      $("#helptext").html("Räägi");
-			startPosition = $("#trans").prop("selectionStart");
-			endPosition = startPosition;
-			var textBeforeCaret = $("#trans").val().slice(0, startPosition);
-			if ((textBeforeCaret.length == 0) || /\. *$/.test(textBeforeCaret) ||  /\n *$/.test(textBeforeCaret)) {
-				doUpper = true;
-			} else {
-				doUpper = false;
-			}
-			doPrependSpace = (textBeforeCaret.length > 0) && !(/\n *$/.test(textBeforeCaret));
-		},
-		onEndOfSpeech : function() {
-			__message("END OF SPEECH");
-			$("#playbutton").addClass("disabled");
-		},
-		onEndOfSession : function() {
-			isConnected = false;
-			__message("END OF SESSION");
-      $("#recbutton").removeClass("playing");
-			updateDisabledState();      
-		},
-		onServerStatus : function(json) {
-			__serverStatus(json.num_workers_available);
-      numWorkersAvailable = json.num_workers_available;
-      updateDisabledState();
-		},
-		onPartialResults : function(hypos) {
-			hypText = prettyfyHyp(hypos[0].transcript, doUpper, doPrependSpace);
-			val = $("#trans").val();
-			$("#trans").val(val.slice(0, startPosition) + hypText + val.slice(endPosition));        
-			endPosition = startPosition + hypText.length;
-			$("#trans").prop("selectionStart", endPosition);
-		},
-		onResults : function(hypos) {
-			hypText = prettyfyHyp(hypos[0].transcript, doUpper, doPrependSpace);
-			val = $("#trans").val();
-			$("#trans").val(val.slice(0, startPosition) + hypText + val.slice(endPosition));        
-			startPosition = startPosition + hypText.length;			
-			endPosition = startPosition;
-			$("#trans").prop("selectionStart", endPosition);
-			if (/\. *$/.test(hypText) ||  /\n *$/.test(hypText)) {
-				doUpper = true;
-			} else {
-				doUpper = false;
-			}
-			doPrependSpace = (hypText.length > 0) && !(/\n *$/.test(hypText));
-		},
-		onError : function(code, data) {
-			dictate.cancel();
-			__error(code, data);
-			// TODO: show error in the GUI
-		},
-		onEvent : function(code, data) {
-			__message(code, data);
-      if (code == 3 /* MSG_INIT_RECORDER */) {
-        isMicrophoneInitialized = true;
+  
+function createDictate() {
+  dictate = new Dictate({
+      server : "ws://bark.phon.ioc.ee:82/dev/duplex-speech-api/ws/speech",
+      serverStatus : "ws://bark.phon.ioc.ee:82/dev/duplex-speech-api/ws/status",
+      referenceHandler : "http://bark.phon.ioc.ee:82/dev/duplex-speech-api/dynamic/reference",
+      //server : "ws://bayes:8888/client/ws/speech",
+      //serverStatus : "ws://bayes:8888/client/ws/status",
+      //referenceHandler : "http://bayes:8888/client/dynamic/reference",
+      
+      recorderWorkerPath : "{{ media_url('js/libs/dictate.js/lib/recorderWorker.js') }}",
+      onReadyForSpeech : function() {
+        isConnected = true;
+        __message("READY FOR SPEECH");
+        $("#recbutton").addClass("playing");
+        $("#helptext").html("Räägi");
+        startPosition = $("#trans").prop("selectionStart");
+        endPosition = startPosition;
+        var textBeforeCaret = $("#trans").val().slice(0, startPosition);
+        if ((textBeforeCaret.length == 0) || /\. *$/.test(textBeforeCaret) ||  /\n *$/.test(textBeforeCaret)) {
+          doUpper = true;
+        } else {
+          doUpper = false;
+        }
+        doPrependSpace = (textBeforeCaret.length > 0) && !(/\n *$/.test(textBeforeCaret));
+      },
+      onEndOfSpeech : function() {
+        __message("END OF SPEECH");
+        $("#playbutton").addClass("disabled");
+      },
+      onEndOfSession : function() {
+        isConnected = false;
+        __message("END OF SESSION");
+        $("#recbutton").removeClass("playing");
+        updateDisabledState();      
+        $("#button-toolbar").removeClass("hidden");
+      },
+      onServerStatus : function(json) {
+        __serverStatus(json.num_workers_available);
+        numWorkersAvailable = json.num_workers_available;
         updateDisabledState();
-      }
-		},
-    rafCallback : rafCallback
-	});
+      },
+      onPartialResults : function(hypos) {
+        hypText = prettyfyHyp(hypos[0].transcript, doUpper, doPrependSpace);
+        val = $("#trans").val();
+        $("#trans").val(val.slice(0, startPosition) + hypText + val.slice(endPosition));        
+        endPosition = startPosition + hypText.length;
+        $("#trans").prop("selectionStart", endPosition);
+      },
+      onResults : function(hypos) {
+        hypText = prettyfyHyp(hypos[0].transcript, doUpper, doPrependSpace);
+        val = $("#trans").val();
+        $("#trans").val(val.slice(0, startPosition) + hypText + val.slice(endPosition));        
+        startPosition = startPosition + hypText.length;			
+        endPosition = startPosition;
+        $("#trans").prop("selectionStart", endPosition);
+        if (/\. *$/.test(hypText) ||  /\n *$/.test(hypText)) {
+          doUpper = true;
+        } else {
+          doUpper = false;
+        }
+        doPrependSpace = (hypText.length > 0) && !(/\n *$/.test(hypText));
+      },
+      onError : function(code, data) {
+        dictate.cancel();
+        __error(code, data);
+        // TODO: show error in the GUI
+      },
+      onEvent : function(code, data) {
+        __message(code, data);
+        if (code == 3 /* MSG_INIT_RECORDER */) {
+          isMicrophoneInitialized = true;
+          updateDisabledState();
+        }
+      },
+      rafCallback : rafCallback,
+      content_id : $("#content_id").html(),
+      user_id : $("#user_id").html()
+    });
+}
 
 // Private methods (called from the callbacks)
 function __message(code, data) {
@@ -198,23 +210,63 @@ function __updateTranscript(text) {
 function toggleListening() {
 	if (isConnected) {
 		dictate.stopListening();
+    $("#recbutton").addClass("disabled");
+    $("#helptext").html("Oota..");    
 	} else {
 		dictate.startListening();
 	}
 }
 
 function cancel() {
-	dictate.cancel();
+	dictate.cancel();  
 }
 
 function clearTranscription() {	
 	$("#trans").val("");
 	// needed, otherwise selectionStart will retain its old value
-	$("#trans").prop("selectionStart", 0);	
-	$("#trans").prop("selectionEnd", 0);	
+	$("#trans").prop("selectionStart", 0);
+	$("#trans").prop("selectionEnd", 0);
+}
+
+function resetText() {
+  clearTranscription();
+  var new_uuid = uuid()
+  $("#content_id").html(new_uuid);
+  dictate.getConfig().content_id = new_uuid;
+  $("#button-toolbar").addClass("hidden");
+  $("#submitButton").addClass("disabled");
+}
+
+function submitReference() {
+  dictate.submitReference($("#trans").val(), 
+    function successCallback(data, textStatus, jqHR) { $("#submitButton").notify("Tekst saadetud. Aitäh!", "success"); }, 
+    function errorCallback(data, textStatus, jqHR) { $("#submitButton").notify("Teksti saatmine ebaõnnestus!", "error"); });
+  $("#submitButton").addClass("disabled");
+}
+
+function uuid() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x8;return v.toString(16);});
+}
+
+function bookmarkletReturnResult() {
+  console.log($(window.parent.document.dictateTextField).val());
+  console.log($("#trans").val());
+  $(document.dictateTextField).val($("#trans").val());
 }
 
 
 $(document).ready(function() {
+  $("#content_id").html(uuid());
+  user_id = $.cookie('dikteeri_user_id', String)
+  if (!user_id) {
+    user_id = uuid();
+    $.cookie('dikteeri_user_id', user_id, { expires: 5*365, path: '/' });
+  }
+  $("#user_id").html(user_id);
+  $("#trans").on('input', function() {
+    $("#submitButton").removeClass("disabled");
+  });  
+  createDictate();
 	dictate.init();
 });
+

@@ -19,7 +19,8 @@ description: Test description
   </div>
   <div class="alert alert-warning  alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <p>Dikteerimine töötab hetkel ainult <a href="http://www.google.com/chrome/">Google Chrome'i</a> suhteliselt värske versiooniga (Windows, Mac, Linux, Android). 
+  <p>Dikteerimine töötab hetkel <a href="http://www.google.com/chrome/">Google Chrome'i</a> suhteliselt värske versiooniga (Windows, Mac, Linux, Android). Töötab ka Firefox 
+  värske versioon (testitud versiooniga 31).
   Leht peaks aadressiriba all küsima luba mikrofoni
   kasutamiseks, see luba tuleks siis anda, vastasel juhul dikteerimine ei tööta.</p>
   <div class="hidden-xs hidden-sm">
@@ -31,12 +32,18 @@ description: Test description
   </div>
   Parima tulemuse saamiseks tuleks dikteerida selge häälega ja mõõdukas tempos (umbes nagu raadiodiktor). Sõnade vahel pause ei pea tegema.
   Dikteerida saab ka kirjavahemärke (",.!?:;") ja reavahetusi (ütle <em>"uus rida"</em>). 
-  <div class="jumbotron">
-  <p>
+  <div class="well">
   <div class="text-center">
+    <div id="button-toolbar" class="hidden btn-toolbar hidden-xs hidden-sm" role="toolbar">
+        <button id="submitButton" type="button" class="btn btn-default disabled" onclick="submitReference();" title="Saada parandatud tekst serverisse, et seda kasutada kõnetuvastusmootori parandamiseks"><span class="glyphicon glyphicon-upload"></span> Saada parandus</button>
+        <button id="resetButton" type="button" class="btn btn-default" onClick="resetText();"><span class="glyphicon glyphicon-remove"></span> Tühjenda</button>
+    </div>  
+  <p>
   <textarea id="trans" class="form-control" rows="6"></textarea>
-  </div>
   </p>
+  </div>
+  <div id="content_id" class="hidden">xxx</div>
+  <div id="user_id" class="hidden">xxx</div>
   <div id="recbutton" class="disabled" onclick="toggleListening();"></div>
   <p id="helptext" class="text-center tiny">Mikrofon initsialiseerimata</p>
   </div>
@@ -49,15 +56,15 @@ description: Test description
 
 <!--
   <div class="small hidden-xs hidden-sm">
-  Eksperimentaalne bookmarklet (ei tööta veel):
-  <a href="javascript:(function(){if(window.myBookmarklet!==undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='http://bark.phon.ioc.ee/dikteeri/bookmarklet.js';}})();">Dikteeri!</a>
+  Eksperimentaalne bookmarklet:
+  <a href="javascript:(function(){if(window.myBookmarklet!==undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='{{ content_url( '/media/js/bookmarklet.js' ) }}';}})();">Dikteeri!</a>
   </div>
 -->
   <div class="small">
   <p>Dikteeritud kõnet võidakse kasutada kõnetuvastussüsteemi parandamiseks. Dikteeritud kõnet
   ega tuvastatud teksti ei jagata kolmandatele osapooltele.
   </p>
-
+  </div>
 
 {% endblock main %}
 
@@ -65,5 +72,7 @@ description: Test description
 {% block scripts %}
     <script src="{{ media_url('js/libs/dictate.js/lib/dictate.js') }}"></script>
     <script src="{{ media_url('js/libs/dictate.js/lib/recorder.js') }}"></script>
+    <script src="{{ media_url('js/libs/dictate.js/lib/speex.min.js') }}"></script>    
+    <script src="{{ media_url('js/libs/notify-combined.min.js') }}"></script>    
     <script src="{{ media_url('js/dikteeri.js') }}"></script>
 {% endblock scripts %}    

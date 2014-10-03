@@ -12,13 +12,14 @@ description: Test description
 
 {% block main %}
 
+
   <div class="">
     <p class="">Sellel veebilehel saab kõnetuvastuse abil dikteerida eestikeelset teksti. 
     Veebibrauser saadab reaalajaliselt kõne TTÜ Küberneetika Instituudi serverisse, kus see muudetakse tekstiks ning saadetakse brauserisse tagasi.
     </p>
   </div>
-  <div class="alert alert-warning  alert-dismissable">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <div class="alert alert-warning  alert-dismissable" id="show_once_message">
+  <button type="button" id="show_once_message_close_button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
   <p>Dikteerimine töötab hetkel <a href="http://www.google.com/chrome/">Google Chrome'i</a> suhteliselt värske versiooniga (Windows, Mac, Linux, Android). Töötab ka Firefox 
   värske versioon (testitud versiooniga 31).
   Leht peaks aadressiriba all küsima luba mikrofoni
@@ -65,6 +66,8 @@ description: Test description
   ega tuvastatud teksti ei jagata kolmandatele osapooltele.
   </p>
   </div>
+  
+  
 
 {% endblock main %}
 
@@ -74,5 +77,7 @@ description: Test description
     <script src="{{ media_url('js/libs/dictate.js/lib/recorder.js') }}"></script>
     <script src="{{ media_url('js/libs/dictate.js/lib/speex.min.js') }}"></script>    
     <script src="{{ media_url('js/libs/notify-combined.min.js') }}"></script>    
+    <script src="{{ media_url('js/libs/jquery.cookieBar.js') }}"></script>    
     <script src="{{ media_url('js/dikteeri.js') }}"></script>
 {% endblock scripts %}    
+

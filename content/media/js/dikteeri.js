@@ -256,6 +256,7 @@ function bookmarkletReturnResult() {
 
 
 $(document).ready(function() {
+  $("#show_once_message").cookieBar({ closeButton : '#show_once_message_close_button' });
   $("#content_id").html(uuid());
   user_id = $.cookie('dikteeri_user_id', String)
   if (!user_id) {
@@ -268,5 +269,7 @@ $(document).ready(function() {
   });  
   createDictate();
 	dictate.init();
+  
+  
 });
 

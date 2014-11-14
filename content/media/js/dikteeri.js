@@ -258,10 +258,10 @@ function bookmarkletReturnResult() {
 $(document).ready(function() {
   $("#show_once_message").cookieBar({ closeButton : '#show_once_message_close_button' });
   $("#content_id").html(uuid());
-  user_id = $.cookie('dikteeri_user_id', String)
+  user_id = $.cookie('dikteeri_user_uuid')
   if (!user_id) {
     user_id = uuid();
-    $.cookie('dikteeri_user_id', user_id, { expires: 5*365, path: '/' });
+    $.cookie('dikteeri_user_uuid', user_id, { expires: 5*365, path: '/' });
   }
   $("#user_id").html(user_id);
   $("#trans").on('input', function() {

@@ -1,0 +1,163 @@
+# Translations template for PROJECT.
+# Copyright (C) 2015 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2015-04-09 17:26+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.3\n"
+
+#: site.yaml:0
+msgid "Tutvustus"
+msgstr ""
+
+#: site.yaml:0
+msgid "Dikteerimine"
+msgstr ""
+
+#: site.yaml:0
+msgid "TTÜ Küberneetika Instituudi foneetika ja kõnetehnoloogia labor"
+msgstr ""
+
+#: content/about.html:10
+msgid "Sissejuhatus"
+msgstr ""
+
+#: content/about.html:12
+msgid ""
+"Selle veebilehe abil saab "
+"[kõnetuvastuvastustehnoloogia](http://www.phon.ioc.ee/dokuwiki/doku.php?id=konetuvastus.et)"
+" abil dikteerida eestikeelset teksti. \n"
+"\n"
+"Rakendus on valminud riikliku programmi *Eesti Keeletehnoloogia "
+"(2011-2017)* projekti [Kõnetuvastus](http://www.keeletehnoloogia.ee/ekt-"
+"projektid/konetuvastus) \n"
+"raames TTÜ Küberneetika Instituudi foneetika ja kõnetehnoloogia laboris. "
+"Rakenduse loojad on Tanel Alumäe (serveritarkvara, kõnetuvastus) ja \n"
+"Kaarel Kaljurand (serveriga suhtlev Javascripti moodul)."
+msgstr ""
+
+#: content/about.html:18
+msgid "Tehnoloogia"
+msgstr ""
+
+#: content/about.html:20
+msgid "TECHNOLOGY_LONG"
+msgstr ""
+
+#: content/index.html:17
+msgid ""
+"Sellel veebilehel saab kõnetuvastuse abil dikteerida eestikeelset teksti."
+" \n"
+"    Veebibrauser saadab reaalajaliselt kõne TTÜ Küberneetika Instituudi "
+"serverisse, kus see muudetakse tekstiks ning saadetakse brauserisse "
+"tagasi."
+msgstr ""
+
+#: content/index.html:23
+msgid ""
+"Dikteerimine töötab hetkel <a "
+"href=\"http://www.google.com/chrome/\">Google Chrome'i</a> suhteliselt "
+"värske versiooniga (Windows, Mac, Linux, Android). Töötab ka Firefox \n"
+"  värske versioon (testitud versiooniga 31).\n"
+"  Leht peaks aadressiriba all küsima luba mikrofoni\n"
+"  kasutamiseks, see luba tuleks siis anda, vastasel juhul dikteerimine ei"
+" tööta."
+msgstr ""
+
+#: content/index.html:28
+msgid "Tähelepanu"
+msgstr ""
+
+#: content/index.html:28
+#, python-format
+msgid ""
+"rahuldava tuvastuskvaliteedi saamiseks tuleks kasutada suu lähedal olevat"
+" nn <em>headset</em>-tüüpi mikrofoni \n"
+"  (näiteks <a "
+"href=\"http://www.hinnavaatlus.ee/products/Arvutikomponendid/K%%C3%%B5rvaklapid/266423/\">selline</a>)."
+" Kindlasti ei tasu\n"
+"  dikteerida näiteks sülearvuti sisseehitatud mikrofoniga."
+msgstr ""
+
+#: content/index.html:34
+msgid ""
+"Parima tulemuse saamiseks tuleks dikteerida selge häälega ja mõõdukas "
+"tempos (umbes nagu raadiodiktor). Sõnade vahel pause ei pea tegema.\n"
+"  Dikteerida saab ka kirjavahemärke (\",.!?:;\") ja reavahetusi (ütle "
+"<em>\"uus rida\"</em>)."
+msgstr ""
+
+#: content/index.html:39
+msgid ""
+"Saada parandatud tekst serverisse, et seda kasutada kõnetuvastusmootori "
+"parandamiseks"
+msgstr ""
+
+#: content/index.html:39
+msgid "Saada parandus"
+msgstr ""
+
+#: content/index.html:40
+msgid "Tühjenda"
+msgstr ""
+
+#: content/index.html:49 content/media/js/dikteeri.js:61
+msgid "Mikrofon initsialiseerimata"
+msgstr ""
+
+#: content/index.html:53
+msgid ""
+"Hetkel on serveris dikteerimiseks <span id=\"serverStatusBar\">0</span> "
+"vaba slotti."
+msgstr ""
+
+#: content/index.html:63
+msgid ""
+"Dikteeritud kõnet võidakse kasutada kõnetuvastussüsteemi parandamiseks. "
+"Dikteeritud kõnet\n"
+"  ega tuvastatud teksti ei jagata kolmandatele osapooltele."
+msgstr ""
+
+#: content/media/js/dikteeri.js:58
+msgid "Dikteerimiseks vajuta nuppu"
+msgstr ""
+
+#: content/media/js/dikteeri.js:64
+msgid "Räägi..."
+msgstr ""
+
+#: content/media/js/dikteeri.js:67
+msgid "Server ülekoormatud või rivist väljas"
+msgstr ""
+
+#: content/media/js/dikteeri.js:113
+msgid "bark.phon.ioc.ee:82/dev/duplex-speech-api"
+msgstr ""
+
+#: content/media/js/dikteeri.js:215
+msgid "Oota.."
+msgstr ""
+
+#: content/media/js/dikteeri.js:243
+msgid "Tekst saadetud. Aitäh!"
+msgstr ""
+
+#: content/media/js/dikteeri.js:244
+msgid "Teksti saatmine ebaõnnestus!"
+msgstr ""
+
+#: layout/base.j2:56
+msgid "Autor"
+msgstr ""
+

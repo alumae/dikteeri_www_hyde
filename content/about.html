@@ -7,23 +7,17 @@ description: Test description
 
 
 {% block main %}
-### Sissejuhatus
+### {% trans %}Sissejuhatus{% endtrans %}
 
-Selle veebilehe abil saab [kõnetuvastuvastustehnoloogia](http://www.phon.ioc.ee/dokuwiki/doku.php?id=konetuvastus.et) abil dikteerida eestikeelset teksti. 
+{% trans %}Selle veebilehe abil saab [kõnetuvastuvastustehnoloogia](http://www.phon.ioc.ee/dokuwiki/doku.php?id=konetuvastus.et) abil dikteerida eestikeelset teksti. 
 
 Rakendus on valminud riikliku programmi *Eesti Keeletehnoloogia (2011-2017)* projekti [Kõnetuvastus](http://www.keeletehnoloogia.ee/ekt-projektid/konetuvastus) 
 raames TTÜ Küberneetika Instituudi foneetika ja kõnetehnoloogia laboris. Rakenduse loojad on Tanel Alumäe (serveritarkvara, kõnetuvastus) ja 
-Kaarel Kaljurand (serveriga suhtlev Javascripti moodul).
+Kaarel Kaljurand (serveriga suhtlev Javascripti moodul).{% endtrans %}
 
-### Tehnoloogia
+### {% trans %}Tehnoloogia{% endtrans %}
 
-Veebrakendus põhineb täielikult vabal tarkvaral:
-
-  * [Kaldi toolkit](http://kaldi.sourceforge.net/) - kõnetuvastusmootor
-  * [kaldi-gstreamer-server](http://github.com/alumae/kaldi-gstreamer-server) - veebirakendus, mis suunab kasutaja kõnesignaali Kaldile tuvastamiseks ning
-  tagastab tuvastustulemused kasutajale
-  * [dictate.js](http://kaljurand.github.io/dictate.js/) - Javascripti teek, mis suhtleb veebirakendusega
-
+{% trans %}TECHNOLOGY_LONG{% endtrans %}
 
 
 {% endblock main %}

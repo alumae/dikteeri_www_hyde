@@ -10,7 +10,7 @@
     {% block topbar %}
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="{{ home_url }}">{{ site_title }}</a>
+        <a class="navbar-brand" href="{{ home_url }}">{{ gettext(site_title) }}</a>
       </div>
       <div class="navbar-collapse collapse">
         {% from "macros.j2" import render_main_menu with context %}

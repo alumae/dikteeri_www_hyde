@@ -53,7 +53,7 @@
       <hr>
       <footer>
         {% block footer %}
-        <p>Autor: <a href="{{ author.url }}">{{ author.name }}</a></p>
+        <p>{% trans %}Autor{% endtrans %}: <a href="{{ author.url }}">{{ gettext(author.name) }}</a></p>
         {% endblock footer %}
       </footer>
     </div> <!-- /container -->

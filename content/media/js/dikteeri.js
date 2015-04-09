@@ -55,16 +55,16 @@ function prettyfyHyp(text, doCapFirst, doPrependSpace) {
 
 function updateDisabledState() {
   var disabled = false;
-  var text = "Dikteerimiseks vajuta nuppu";
+  var text = "{{ _('Dikteerimiseks vajuta nuppu') }}";
   if (!isMicrophoneInitialized) {
     disabled = true;
-    text = "Mikrofon initsialiseerimata";
+    text = "{{ _('Mikrofon initsialiseerimata') }}";
   } else if (isConnected) {
     disabled = false;
-    text = "Räägi...";
+    text = "{{ _('Räägi...') }}";
   } else if (numWorkersAvailable == 0) {
     disabled = true;
-    text = "Server ülekoormatud või rivist väljas";
+    text = "{{ _('Server ülekoormatud või rivist väljas') }}";
   }
   if (disabled) {
     $("#recbutton").addClass("disabled");
@@ -110,10 +110,11 @@ var dictate = null;
 
   
 function createDictate() {
+  serverBaseUrl = "{{ _('bark.phon.ioc.ee:82/dev/duplex-speech-api') }}";
   dictate = new Dictate({
-      server : "ws://bark.phon.ioc.ee:82/dev/duplex-speech-api/ws/speech",
-      serverStatus : "ws://bark.phon.ioc.ee:82/dev/duplex-speech-api/ws/status",
-      referenceHandler : "http://bark.phon.ioc.ee:82/dev/duplex-speech-api/dynamic/reference",
+      server : "ws://" + serverBaseUrl + "/ws/speech",
+      serverStatus : "ws://" + serverBaseUrl + "/ws/status",
+      referenceHandler : "http://" + serverBaseUrl + "/dynamic/reference",
       //server : "ws://bayes:8888/client/ws/speech",
       //serverStatus : "ws://bayes:8888/client/ws/status",
       //referenceHandler : "http://bayes:8888/client/dynamic/reference",
@@ -211,7 +212,7 @@ function toggleListening() {
 	if (isConnected) {
 		dictate.stopListening();
     $("#recbutton").addClass("disabled");
-    $("#helptext").html("Oota..");    
+    $("#helptext").html("{{ _('Oota..') }}");    
 	} else {
 		dictate.startListening();
 	}
@@ -239,8 +240,8 @@ function resetText() {
 
 function submitReference() {
   dictate.submitReference($("#trans").val(), 
-    function successCallback(data, textStatus, jqHR) { $("#submitButton").notify("Tekst saadetud. Aitäh!", "success"); }, 
-    function errorCallback(data, textStatus, jqHR) { $("#submitButton").notify("Teksti saatmine ebaõnnestus!", "error"); });
+    function successCallback(data, textStatus, jqHR) { $("#submitButton").notify("{{ _('Tekst saadetud. Aitäh!') }}", "success"); }, 
+    function errorCallback(data, textStatus, jqHR) { $("#submitButton").notify("{{ _('Teksti saatmine ebaõnnestus!') }}", "error"); });
   $("#submitButton").addClass("disabled");
 }
 

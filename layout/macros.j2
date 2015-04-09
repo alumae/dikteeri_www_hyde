@@ -1,7 +1,7 @@
 {% macro render_main_menu() -%}
 <ul class="nav navbar-nav">
 {% for menu_item in menu -%}
-  <li{% if menu_item.url == resource.relative_path or menu_item.active %} class="active"{% endif %}><a href="{{ menu_item.url }}">{{ menu_item.title }}</a></li>
+  <li{% if menu_item.url == resource.relative_path or menu_item.active %} class="active"{% endif %}><a href="{{ menu_item.url }}">{{ gettext(menu_item.title) }} </a></li>
 {%- endfor %}
 </ul>
 {%- endmacro %}
@@ -10,7 +10,7 @@
 <ul class="nav nav-list">
     <li class="nav-header">Sidebar</li>
 {% for sidebar_item in sidebar -%}
-  <li{% if sidebar_item.url == resource.url or sidebar_item.active %} class="active"{% endif %}><a href="{{ sidebar_item.url }}">{{ sidebar_item.title }}</a></li>
+  <li{% if sidebar_item.url == resource.url or sidebar_item.active %} class="active"{% endif %}><a href="{{ sidebar_item.url }}">{{ sidebar_item.title }} /a></li>
 {%- endfor %}
 </ul>
 {%- endmacro %}

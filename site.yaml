@@ -5,6 +5,9 @@ base_url : http://localhost:8080
 plugins:
     - hyde.ext.plugins.meta.MetaPlugin
     - hyde.ext.plugins.auto_extend.AutoExtendPlugin
+    - local.i18NPlugin
+    - hyde.ext.plugins.sorter.SorterPlugin
+    - hyde.ext.plugins.tagger.TaggerPlugin
     - hyde.ext.plugins.syntext.SyntextPlugin
     - hyde.ext.plugins.textlinks.TextlinksPlugin
 context:
@@ -19,3 +22,14 @@ context:
             - title: Tutvustus
               url: about.html
 
+i18N:
+    locales:
+        - en
+        - et
+
+meta:
+    lc: et
+    encoding: 'utf-8'
+    nodemeta: meta.yaml
+    created: !!timestamp 2010-01-01 00:00:00
+    author: Tanel Alumäe

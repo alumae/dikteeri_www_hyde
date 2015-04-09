@@ -1,0 +1,17 @@
+extends: site.yaml
+mode: production
+base_url: /dictate
+media_url: /dictate/media
+
+publisher:
+        ssh:
+            type: hyde.ext.publishers.ssh.SSH
+            username: webspeech
+            server: fourier
+            target: /var/www/dictate
+            command: rsync
+            opts: -r -e ssh
+meta:
+    lc: en
+    encoding: 'utf-8'
+

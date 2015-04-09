@@ -11,3 +11,6 @@ publisher:
             target: /var/www/dikteeri
             command: rsync
             opts: -r -e ssh
+meta:
+    lc: et
+    encoding: 'utf-8'
